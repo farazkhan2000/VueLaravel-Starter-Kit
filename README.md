@@ -1,61 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# VueLaravel Starter Kit
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured SPA starter template built using **Laravel 12**, **Vue.js 3**, **Pinia**, and **Axios**. This template is designed to save time and help you get started with new projects quickly, with authentication (Login, Signup, Forgot Password) and middleware already set up.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- ✅ **Laravel 12** backend (API-first architecture)
+- ✅ **Vue.js 3** SPA frontend inside Laravel
+- ✅ **Pinia** for state management
+- ✅ **Axios** for API requests
+- ✅ **Authentication** (Login, Signup, Forgot Password)
+- ✅ **Middleware-protected routes**
+- ✅ Clean folder structure
+- ✅ Ready-to-extend and scale
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📦 Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Backend:** Laravel 12 (API Mode)
+- **Frontend:** Vue 3 (inside Laravel)
+- **State Management:** Pinia
+- **HTTP Client:** Axios
+- **Auth:** Laravel Sanctum or API Token (depending on setup)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Getting Started
 
-## Laravel Sponsors
+### 1. Clone the Repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/your-username/vue-laravel-starter-kit.git
+cd vue-laravel-starter-kit
+```
 
-### Premium Partners
+### 2. Install Backend Dependencies (Laravel)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
 
-## Contributing
+> ⚙️ Make sure to configure your database credentials in `.env`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Install Frontend Dependencies (Vue)
 
-## Code of Conduct
+```bash
+cd resources/js
+npm install
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 📂 Folder Structure Overview
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+/app            -> Laravel app code
+/resources/js   -> Vue 3 SPA with Pinia & Axios
+/routes         -> API routes defined here
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛡️ Auth Flow
+
+- Signup and Login with proper validation
+- Forgot Password with email link (configure mail settings)
+- Middleware-protected routes using Laravel Sanctum or token-based auth
+- State management with Pinia
+- Axios interceptors for auth token handling
+
+---
+
+## 🤝 Contributing
+
+This project is open to contributions. Feel free to fork the repo and create a pull request if you'd like to improve it.
+
+---
+
+## 🧑‍💻 Author
+
+**Faraz Khan**  
+Freelance Web Developer  
+[GitHub](https://github.com/your-username)  
+[Email](mailto:f.skipper14@gmail.com)
+
+---
+
+## 🪪 License
+
+This project is open-source and available under the [MIT License](LICENSE).
