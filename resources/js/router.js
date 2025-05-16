@@ -28,6 +28,11 @@ const routes = [
         meta: { requiresGuest: true },
     },
     {
+        path: "/reset-password",
+        component: () => import("./Pages/auth/ResetPassword.vue"),
+        meta: { requiresGuest: true },
+    },
+    {
         path: "/dashboard",
         component: () => import("@/Pages/Dashboard.vue"),
         meta: { requiresAuth: true },
@@ -42,33 +47,30 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore();
 
-    // If route requires authentication
-    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    // For routes that don't require auth
+    if (!to.meta.requiresAuth && !to.meta.requiresGuest) {
+        next();
+        return;
+    }
+
+    // Check authentication state
+    const isAuthenticated = await authStore.checkAuth();
+
+    // Redirect unauthenticated users trying to access protected routes
+    if (to.meta.requiresAuth && !isAuthenticated) {
         next({ path: "/login", query: { redirect: to.fullPath } });
         return;
     }
 
-    // If route requires guest (login/register)
-    if (to.meta.requiresGuest && authStore.isAuthenticated) {
+    // Redirect authenticated users away from guest-only routes
+    if (to.meta.requiresGuest && isAuthenticated) {
         next({ path: "/dashboard" });
         return;
     }
 
-    // If route requires specific role
+    // Role-based access control
     if (to.meta.requiredRole) {
-        // Ensure user data is loaded
-        if (!authStore.user) {
-            try {
-                await authStore.fetchUser();
-            } catch (error) {
-                authStore.resetAuth();
-                next({ path: "/login" });
-                return;
-            }
-        }
-
-        // Check role
-        if (authStore.user.role !== to.meta.requiredRole) {
+        if (authStore.user?.role !== to.meta.requiredRole) {
             next({ path: "/unauthorized" });
             return;
         }

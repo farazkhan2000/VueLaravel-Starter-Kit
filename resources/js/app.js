@@ -1,15 +1,22 @@
-import './bootstrap';
+import "./bootstrap";
 import { createApp } from "vue";
-import App from './App.vue';  
+import App from "./App.vue";
 import router from "./router";
-import { createPinia } from 'pinia';
+import { createPinia } from "pinia";
 import "../css/app.css";
+import { useAuthStore } from "./stores/authStore";
 
-import 'vue3-toastify/dist/index.css' // Vue 3 toastify css import
+import "vue3-toastify/dist/index.css"; // Vue 3 toastify css import
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())  
-app.use(router)
+const pinia = createPinia();
+app.use(pinia);
 
-app.mount('#app')
+const authStore = useAuthStore();
+authStore.init();
+
+authStore.checkAuth().finally(() => {
+    app.use(router);
+    app.mount("#app");
+});

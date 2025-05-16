@@ -53,32 +53,39 @@
                         <div class="flex-1 border-t text-gray-200"></div>
                     </div>
 
-                    <!-- Error Display -->
-                    <div
-                        v-if="auth.errors"
-                        class="text-red-500 text-sm mb-4 space-y-1"
-                    >
-                        <div v-for="(error, field) in auth.errors" :key="field">
-                            <p v-for="msg in error" :key="msg">{{ msg }}</p>
-                        </div>
-                    </div>
-
                     <!-- Register Form -->
                     <form
                         @submit.prevent="handleRegister"
                         class="space-y-5 mb-4"
+                        autocomplete="off"
                     >
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-gray-700 mb-1"
-                                >Name</label
-                            >
-                            <input
-                                type="text"
-                                v-model="form.name"
-                                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                required
-                            />
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-1"
+                                    >First Name</label
+                                >
+                                <input
+                                    type="text"
+                                    v-model="form.first_name"
+                                    class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    autocomplete="firstname"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-1"
+                                    >Last Name</label
+                                >
+                                <input
+                                    type="text"
+                                    v-model="form.last_name"
+                                    class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    autocomplete="lastname"
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <div>
@@ -90,6 +97,7 @@
                                 type="email"
                                 v-model="form.email"
                                 class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                autocomplete="username email"
                                 required
                             />
                         </div>
@@ -103,6 +111,7 @@
                                 type="password"
                                 v-model="form.password"
                                 class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                autocomplete="new-password"
                                 required
                             />
                         </div>
@@ -116,6 +125,7 @@
                                 type="password"
                                 v-model="form.password_confirmation"
                                 class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                autocomplete="new-password"
                                 required
                             />
                         </div>
@@ -168,6 +178,8 @@ export default {
         return {
             form: {
                 name: "",
+                first_name: "",
+                last_name: "",
                 email: "",
                 password: "",
                 password_confirmation: "",
@@ -178,7 +190,11 @@ export default {
     methods: {
         async handleRegister() {
             try {
-                await this.auth.register(this.form);
+                const formToSubmit = {
+                    ...this.form,
+                    name: `${this.form.first_name} ${this.form.last_name}`.trim(),
+                };
+                await this.auth.register(formToSubmit);
             } catch (e) {
                 // Error handled in store
             }
