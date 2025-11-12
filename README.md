@@ -32,7 +32,7 @@ A full-featured SPA starter template built using **Laravel 12**, **Vue.js 3**, *
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/vue-laravel-starter-kit.git
+git clone https://github.com/farazkhan2000/vue-laravel-starter-kit.git
 cd vue-laravel-starter-kit
 ```
 
@@ -88,7 +88,7 @@ This project is open to contributions. Feel free to fork the repo and create a p
 
 **Faraz Khan**  
 Freelance Web Developer  
-[GitHub](https://github.com/your-username)  
+[GitHub](https://github.com/farazkhan2000)  
 [Email](mailto:f.skipper14@gmail.com)
 
 ---
